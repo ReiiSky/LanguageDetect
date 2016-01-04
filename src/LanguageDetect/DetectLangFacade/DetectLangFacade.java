@@ -14,6 +14,7 @@ public class DetectLangFacade {
     private ArrayList<Sample> samples;
     private Subject subject;
     private HashMap<String, Double> fullwordResults;
+    private HashMap<String, Double> trigramResults;
 
     public DetectLangFacade(){}
     public DetectLangFacade(String context){
@@ -24,6 +25,7 @@ public class DetectLangFacade {
         }
         this.subject = new Subject(context, specialChars);
         this.fullwordResults = checkFullwords(this.samples, this.subject);
+        this.trigramResults = checkTrigram(this.samples, this.subject);
     }
 
     public ArrayList<Sample> getSamples() { return samples; }
@@ -35,10 +37,20 @@ public class DetectLangFacade {
     public HashMap<String, Double> getFullwordResults() { return fullwordResults; }
     public void setFullwordResults(HashMap<String, Double> fullwordResults) { this.fullwordResults = fullwordResults; }
 
+    public HashMap<String, Double> getTrigramResults() { return trigramResults; }
+    public void setTrigramResults(HashMap<String, Double> trigramResults) { this.trigramResults = trigramResults; }
+
     private HashMap<String, Double> checkFullwords(ArrayList<Sample> samples, Subject subject){
         HashMap<String, Double> map = new HashMap<>();
         for(Sample sample : samples){
             map.put(sample.getLanguage(),new JaccardSimilarity(sample.getFullword(), subject.getFullword()).getResult());
+        }
+        return map;
+    }
+    private HashMap<String, Double> checkTrigram(ArrayList<Sample> samples, Subject subject){
+        HashMap<String, Double> map = new HashMap<>();
+        for(Sample sample : samples){
+            map.put(sample.getLanguage(),new JaccardSimilarity(sample.getTrigram(), subject.getTrigram()).getResult());
         }
         return map;
     }

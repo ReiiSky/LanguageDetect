@@ -17,5 +17,6 @@
       <Button fx:id="getContextBtn" layoutX="444.0" layoutY="10.0" mnemonicParsing="false" onAction="#getContext" prefHeight="25.0" prefWidth="135.0" text="Get Context" />
       <Button fx:id="checkBtn" layoutX="444.0" layoutY="47.0" mnemonicParsing="false" onAction="#check" prefHeight="25.0" prefWidth="135.0" text="Check" />
       <Label fx:id="resultLabel" layoutX="444.0" layoutY="88.0" prefHeight="17.0" prefWidth="135.0" />
+      <Button fx:id="addSampleBtn" layoutX="444.0" layoutY="261.0" mnemonicParsing="false" onAction="#addSampleBtn" prefHeight="25.0" prefWidth="135.0" text="Add Sample" />
    </children>
 </AnchorPane>

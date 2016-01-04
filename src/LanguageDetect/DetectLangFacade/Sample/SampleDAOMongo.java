@@ -6,9 +6,11 @@ import LanguageDetect.DetectLangFacade.WordList.WordListFactory;
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientException;
+import com.mongodb.MongoWriteException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -84,11 +86,8 @@ public class SampleDAOMongo implements SampleDAO {
     @Override
     public boolean updateSample(Sample sample) {
         try{
-            Document doc = new Document("language", sample.getLanguage())
-                    .append("specialChars", sample.getSpecialChars())
-                    .append("fullword", convertWordlistToDoclist(sample.getFullword().getList()))
-                    .append("trigram", convertWordlistToDoclist(sample.getTrigram().getList()));
-            sampleCollection.findOneAndReplace(new Document("language", sample.getLanguage()), doc);
+            deleteSample(sample.getLanguage());
+            addSample(sample);
             return true;
         }catch (MongoClientException e){
             return false;
@@ -98,10 +97,11 @@ public class SampleDAOMongo implements SampleDAO {
     @Override
     public boolean deleteSample(String language) {
         try{
-            sampleCollection.findOneAndDelete(new Document("language", language));
+            sampleCollection.deleteOne(new Document("language", language));
             return true;
-        }catch (MongoClientException e)
+        }catch (MongoWriteException e)
         {
+            System.out.print(e.toString());
             return false;
         }
     }

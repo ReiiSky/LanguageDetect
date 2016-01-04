@@ -8,7 +8,7 @@ import java.util.Collections;
 /**
  * Created by MuratCan on 3.1.2016.
  */
-public class FullWordParse implements ParsingType {
+public class FullwordParse implements ParsingType {
     @Override
     public ArrayList<Word> parse(String string, String specialChars) {
         String regex = "[^a-zA-Z" + specialChars + "\\s]";

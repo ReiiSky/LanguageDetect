@@ -1,21 +1,18 @@
 package LanguageDetect;
 
 import LanguageDetect.DetectLangFacade.DetectLangFacade;
-import LanguageDetect.DetectLangFacade.Sample.Sample;
-import LanguageDetect.DetectLangFacade.Sample.SampleDAOMongo;
-import LanguageDetect.DetectLangFacade.Subject.Subject;
-import LanguageDetect.DetectLangFacade.WordList.Word;
-import LanguageDetect.DetectLangFacade.WordList.WordListFactory;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainFormController {
     public TextField linkTF;
@@ -23,6 +20,7 @@ public class MainFormController {
     public Button getContextBtn;
     public Button checkBtn;
     public Label resultLabel;
+    public Button addSampleBtn;
 
     public void getContext(ActionEvent actionEvent) {
         try{
@@ -45,6 +43,20 @@ public class MainFormController {
         //for(Word w : newFacade.getSubject().getFullword().getList()){
           //  contextTA.appendText(w.getString() + " , " + w.getCount() + "\n");
         //}
-        contextTA.appendText(newFacade.getFullwordResults().toString());
+        contextTA.appendText(newFacade.getFullwordResults().toString() + "\n");
+        contextTA.appendText(newFacade.getTrigramResults().toString());
+    }
+
+    public void addSampleBtn(ActionEvent actionEvent) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddSample.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Add Samples");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

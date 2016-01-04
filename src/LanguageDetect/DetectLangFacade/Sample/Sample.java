@@ -34,6 +34,9 @@ public class Sample {
         this.trigram = trigram;
     }
 
+    public ObjectId getId() { return id; }
+    public void setId(ObjectId id) { this.id = id; }
+
     public String getLanguage() {
         return language;
     }
@@ -61,20 +64,22 @@ public class Sample {
     public void updateFullword (WordList fullwordlist){
         for(Word w : fullwordlist.getList()){
             if(this.fullword.getList().contains(w))
-                this.fullword.getList().get(this.fullword.getList().indexOf(w)).incCount();
+                this.fullword.getList().get(this.fullword.getList().indexOf(w)).addCount(w.getCount());
             else
                 this.fullword.getList().add(w);
         }
         Collections.sort(this.fullword.getList(), Collections.reverseOrder());
+        if(this.fullword.getList().size() > 50) this.fullword.getList().subList(50, this.fullword.getList().size()).clear();
     }
 
     public void updateTrigram(WordList trigramlist){
         for(Word w : trigramlist.getList()){
             if(this.trigram.getList().contains(w))
-                this.trigram.getList().get(this.trigram.getList().indexOf(w)).incCount();
+                this.trigram.getList().get(this.trigram.getList().indexOf(w)).addCount(w.getCount());
             else
                 this.trigram.getList().add(w);
         }
         Collections.sort(this.trigram.getList(), Collections.reverseOrder());
+        if(this.fullword.getList().size() > 50) this.fullword.getList().subList(50, this.fullword.getList().size()).clear();
     }
 }

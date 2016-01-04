@@ -25,6 +25,8 @@ public class Word implements Comparable<Word>{
 
     public void incCount(){ this.count += 1; }
 
+    public void addCount(int count){ this.count += count; }
+
     /**
      * ArrayList's contains() method uses equals()
      * method of the object to evaluate if two objects
