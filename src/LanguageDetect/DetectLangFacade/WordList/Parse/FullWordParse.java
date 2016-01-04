@@ -21,6 +21,7 @@ public class FullWordParse implements ParsingType {
             else arrayList.add(word);
         }
         Collections.sort(arrayList, Collections.reverseOrder());
+        if(arrayList.size() > 50) arrayList.subList(50, arrayList.size()).clear();
         return arrayList;
     }
 }

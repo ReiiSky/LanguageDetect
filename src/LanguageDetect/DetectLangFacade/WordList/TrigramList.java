@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class TrigramList extends WordList {
     public TrigramList(ArrayList<Word> wordlist) {
         setParsingType(new TrigramParse());
+        wordlist.subList(50, wordlist.size()).clear();
         setList(wordlist);
     }
     public TrigramList(String string, String specialChars) {

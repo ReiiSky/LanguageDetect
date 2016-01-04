@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class FullwordList extends WordList {
     public FullwordList(ArrayList<Word> wordlist) {
         setParsingType(new FullWordParse());
+        wordlist.subList(50, wordlist.size()).clear();
         setList(wordlist);
     }
     public FullwordList(String string, String specialChars) {

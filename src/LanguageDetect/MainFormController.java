@@ -35,9 +35,16 @@ public class MainFormController {
     }
 
     public void check(ActionEvent actionEvent) {
-
         DetectLangFacade newFacade = new DetectLangFacade(contextTA.getText());
         contextTA.clear();
-        contextTA.appendText(newFacade.getFullwordResult().get("Türkçe").toString());
+        //for(Word w : newFacade.getSamples().get(0).getFullword().getList() ){
+          //  contextTA.appendText(w.getString() + " , " + w.getCount() + "\n");
+        //}
+        contextTA.appendText("size1 ," +newFacade.getSubject().getFullword().getList().size());
+        contextTA.appendText("size2 ," +newFacade.getSamples().get(0).getFullword().getList().size() + "\n");
+        //for(Word w : newFacade.getSubject().getFullword().getList()){
+          //  contextTA.appendText(w.getString() + " , " + w.getCount() + "\n");
+        //}
+        contextTA.appendText(newFacade.getFullwordResults().toString());
     }
 }
