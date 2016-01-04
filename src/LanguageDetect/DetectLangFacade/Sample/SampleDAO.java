@@ -10,5 +10,5 @@ public interface SampleDAO {
     Sample getSample(String language);
     boolean addSample(Sample sample);
     boolean updateSample(Sample sample);
-    boolean deleteSample(Sample sample);
+    boolean deleteSample(String language);
 }

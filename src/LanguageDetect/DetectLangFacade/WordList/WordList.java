@@ -13,7 +13,8 @@ public abstract class WordList {
     private ParsingType parsingType;
 
     public ArrayList<Word> getList() { return list; }
+    public void setList(ArrayList<Word> list) { this.list = list; }
+
     public ParsingType getParsingType() { return parsingType; }
-    protected void setList(ArrayList<Word> list) { this.list = list; }
-    protected void setParsingType(ParsingType parsingType) { this.parsingType = parsingType; }
+    public void setParsingType(ParsingType parsingType) { this.parsingType = parsingType; }
 }

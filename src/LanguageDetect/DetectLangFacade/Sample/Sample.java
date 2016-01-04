@@ -1,21 +1,35 @@
 package LanguageDetect.DetectLangFacade.Sample;
 
 import LanguageDetect.DetectLangFacade.WordList.WordList;
+import LanguageDetect.DetectLangFacade.WordList.WordListFactory;
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
 
 /**
  * Created by MuratCan on 3.1.2016.
  */
 public class Sample {
+    private ObjectId id;
     private String language;
     private String specialChars;
-    private WordList fullWord;
-    private WordList trigramWord;
+    private WordList fullword;
+    private WordList trigram;
 
-    public Sample(String language,String specialChars, WordList fullWord, WordList trigramWord) {
+    public Sample(){
+        this.id = null;
+        this.language = null;
+        this.specialChars = null;
+        this.fullword = null;
+        this.trigram = null;
+    }
+    public Sample(ObjectId id,String language,String specialChars, WordList fullword, WordList trigram) {
+        this.id = id;
         this.language = language;
         this.specialChars = specialChars;
-        this.trigramWord = trigramWord;
-        this.fullWord = fullWord;
+        this.fullword = fullword;
+        this.trigram = trigram;
     }
 
     public String getLanguage() {
@@ -31,16 +45,16 @@ public class Sample {
     public void setSpecialChars(String specialChars) { this.specialChars = specialChars; }
 
     public WordList getFullWord() {
-        return fullWord;
+        return fullword;
     }
     public void setFullWord(WordList fullWord) {
-        this.fullWord = fullWord;
+        this.fullword = fullWord;
     }
 
     public WordList getTrigramWord() {
-        return trigramWord;
+        return trigram;
     }
     public void setTrigramWord(WordList trigramWord) {
-        this.trigramWord = trigramWord;
+        this.trigram = trigramWord;
     }
 }

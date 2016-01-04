@@ -1,7 +1,10 @@
 package LanguageDetect;
 
+import LanguageDetect.DetectLangFacade.Sample.Sample;
+import LanguageDetect.DetectLangFacade.Sample.SampleDAOMongo;
 import LanguageDetect.DetectLangFacade.Subject.Subject;
 import LanguageDetect.DetectLangFacade.WordList.Word;
+import LanguageDetect.DetectLangFacade.WordList.WordListFactory;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +14,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainFormController {
     public TextField linkTF;
@@ -30,10 +34,10 @@ public class MainFormController {
     }
 
     public void check(ActionEvent actionEvent) {
-        Subject newSubject = new Subject(contextTA.getText());
-        contextTA.clear();
-        for(Word w : newSubject.getFullWord().getList()){
-            contextTA.appendText(w.getString() + "," + w.getCount() + "\n");
+        SampleDAOMongo dao = new SampleDAOMongo();
+        Sample sample = dao.getSample("türkçe");
+        for(Word w : sample.getFullWord().getList()){
+            contextTA.appendText(w.getString() + " , " + w.getCount() + "\n");
         }
     }
 }
