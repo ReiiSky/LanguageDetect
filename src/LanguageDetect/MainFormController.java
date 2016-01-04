@@ -18,10 +18,13 @@ public class MainFormController {
     public TextField linkTF;
     public TextArea contextTA;
     public Button getContextBtn;
-    public Button checkBtn;
     public Label resultLabel;
     public Button addSampleBtn;
+    public Button checkBtn;
 
+    /**
+     * Gets context from link and sets it as the contexTA's text
+     */
     public void getContext(ActionEvent actionEvent) {
         try{
             Document doc = Jsoup.connect(linkTF.getText()).get();
@@ -32,21 +35,20 @@ public class MainFormController {
         }
     }
 
+    /**
+     * When checkBtn is clicked, this method creates a new
+     * DetectLangFacade so the client doesn't have to know
+     * about inner works. Facade calculates the probability
+     * and determines the context's language.
+     */
     public void check(ActionEvent actionEvent) {
         DetectLangFacade newFacade = new DetectLangFacade(contextTA.getText());
-        contextTA.clear();
-        //for(Word w : newFacade.getSamples().get(0).getFullword().getList() ){
-          //  contextTA.appendText(w.getString() + " , " + w.getCount() + "\n");
-        //}
-        contextTA.appendText("size1 ," +newFacade.getSubject().getFullword().getList().size());
-        contextTA.appendText("size2 ," +newFacade.getSamples().get(0).getFullword().getList().size() + "\n");
-        //for(Word w : newFacade.getSubject().getFullword().getList()){
-          //  contextTA.appendText(w.getString() + " , " + w.getCount() + "\n");
-        //}
-        contextTA.appendText(newFacade.getFullwordResults().toString() + "\n");
-        contextTA.appendText(newFacade.getTrigramResults().toString());
+        resultLabel.setText(newFacade.getResult());
     }
 
+    /**
+     *Opens AddSample form.
+     */
     public void addSampleBtn(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddSample.fxml"));

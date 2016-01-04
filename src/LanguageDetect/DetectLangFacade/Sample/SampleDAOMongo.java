@@ -10,19 +10,25 @@ import com.mongodb.MongoWriteException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
 import java.util.ArrayList;
 
 /**
+ * Data Access Object Pattern Implementation for MongoDB.
+ *
  * Created by MuratCan on 3.1.2016.
  */
 public class SampleDAOMongo implements SampleDAO {
-    MongoClient client = new MongoClient();
-    MongoDatabase database = client.getDatabase("langdetect");
-    MongoCollection<Document> sampleCollection = database.getCollection("samples");
+    MongoClient client = new MongoClient(); //Default MongoClient.
+    MongoDatabase database = client.getDatabase("langdetect"); //MongoDatabase.
+    MongoCollection<Document> sampleCollection = database.getCollection("samples"); //Samples collection.
 
+    /**
+     * Gets all samples from the database and puts them in an ArrayList.
+     *
+     * @return
+     */
     @Override
     public ArrayList<Sample> getAllSamples() {
         try{
@@ -46,6 +52,12 @@ public class SampleDAOMongo implements SampleDAO {
         }
     }
 
+    /**
+     * Gets the sample by its language.
+     *
+     * @param language
+     * @return
+     */
     @Override
     public Sample getSample(String language) {
         try{
@@ -69,6 +81,12 @@ public class SampleDAOMongo implements SampleDAO {
         }
     }
 
+    /**
+     * Adds a new sample to the database.
+     *
+     * @param sample
+     * @return
+     */
     @Override
     public boolean addSample(Sample sample) {
         try{
@@ -83,6 +101,12 @@ public class SampleDAOMongo implements SampleDAO {
         }
     }
 
+    /**
+     * Updates the given sample.
+     *
+     * @param sample
+     * @return
+     */
     @Override
     public boolean updateSample(Sample sample) {
         try{
@@ -94,6 +118,12 @@ public class SampleDAOMongo implements SampleDAO {
         }
     }
 
+    /**
+     * Deletes the given sample from database.
+     *
+     * @param language
+     * @return
+     */
     @Override
     public boolean deleteSample(String language) {
         try{
@@ -106,6 +136,13 @@ public class SampleDAOMongo implements SampleDAO {
         }
     }
 
+    /**
+     * Converts the ArrayList of Documents to WordList.
+     *
+     * @param listType
+     * @param docs
+     * @return
+     */
     private WordList convertDoclistToWordlist(String listType, ArrayList<Document> docs){
         ArrayList<Word> wordlist = new ArrayList<>();
         for(Document doc : docs){
@@ -114,6 +151,12 @@ public class SampleDAOMongo implements SampleDAO {
         return new WordListFactory().create(listType, wordlist);
     }
 
+    /**
+     * Converts the ArrayList of Words to ArrayList of Documents.
+     *
+     * @param wordlist
+     * @return
+     */
     private ArrayList<Document> convertWordlistToDoclist (ArrayList<Word> wordlist){
         ArrayList<Document> doclist = new ArrayList<>();
         for(Word word : wordlist){

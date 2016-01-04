@@ -6,6 +6,8 @@ import LanguageDetect.DetectLangFacade.WordList.Word;
 import LanguageDetect.DetectLangFacade.WordList.WordList;
 
 /**
+ * Calculates the similarities of the lists.
+ *
  * Created by MuratCan on 4.1.2016.
  */
 public class JaccardSimilarity {
@@ -14,9 +16,9 @@ public class JaccardSimilarity {
     public JaccardSimilarity(WordList sample, WordList subject) {
         double intersection = 0;
         for(Word word : subject.getList()){
-            if(sample.getList().contains(word)) intersection++;
+            if(sample.getList().contains(word)) intersection++;//increments the intersection count.
         }
-        this.result = (double) (intersection / ((double)(sample.getList().size())
+        this.result = (double) (intersection / ((double)(sample.getList().size()) // intersection/union
                 + (double)(subject.getList().size())
                 - intersection));
     }

@@ -22,6 +22,11 @@ public class AddSampleFormController {
     public TextField specCharTF;
     public Button addBtn;
 
+    /**
+     *Takes the language, special characters of the language and
+     *the links. If the database has any record about that language
+     * the record will be updated by using the given links.
+     */
     public void addSamples(ActionEvent actionEvent) {
         String language = languageTF.getText();
         String specialChars = specCharTF.getText();

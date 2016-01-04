@@ -6,8 +6,13 @@ import LanguageDetect.DetectLangFacade.Subject.Subject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
+ * A facade that determines given text's language.
+ * All inner work is done in this facade so the user
+ * doesn't have to know about the process.
+ *
  * Created by MuratCan on 3.1.2016.
  */
 public class DetectLangFacade {
@@ -15,17 +20,19 @@ public class DetectLangFacade {
     private Subject subject;
     private HashMap<String, Double> fullwordResults;
     private HashMap<String, Double> trigramResults;
+    private String result;
 
     public DetectLangFacade(){}
     public DetectLangFacade(String context){
         this.samples = new SampleDAOMongo().getAllSamples();
         String specialChars = "";
-        for(Sample s : samples){
+        for(Sample s : samples){ // gets all samples special chars and puts them together
             specialChars += s.getSpecialChars();
         }
-        this.subject = new Subject(context, specialChars);
-        this.fullwordResults = checkFullwords(this.samples, this.subject);
-        this.trigramResults = checkTrigram(this.samples, this.subject);
+        this.subject = new Subject(context, specialChars); //creates the subject
+        this.fullwordResults = checkFullwords(this.samples, this.subject); //set of results according to fullword list.
+        this.trigramResults = checkTrigram(this.samples, this.subject);//set of results according to trigram list.
+        this.result = getFinalResult(fullwordResults, trigramResults); // final result.
     }
 
     public ArrayList<Sample> getSamples() { return samples; }
@@ -40,6 +47,15 @@ public class DetectLangFacade {
     public HashMap<String, Double> getTrigramResults() { return trigramResults; }
     public void setTrigramResults(HashMap<String, Double> trigramResults) { this.trigramResults = trigramResults; }
 
+    public String getResult() { return result; }
+    public void setResult(String result) { this.result = result; }
+
+    /**
+     * calculates the subject's fullword list similarity to each sample's fullword similarity.
+     * @param samples
+     * @param subject
+     * @return
+     */
     private HashMap<String, Double> checkFullwords(ArrayList<Sample> samples, Subject subject){
         HashMap<String, Double> map = new HashMap<>();
         for(Sample sample : samples){
@@ -47,11 +63,44 @@ public class DetectLangFacade {
         }
         return map;
     }
+    /**
+     * Calculates the subject's trigram list similarity to each sample's trigram similarity.
+     * @param samples
+     * @param subject
+     * @return
+     */
     private HashMap<String, Double> checkTrigram(ArrayList<Sample> samples, Subject subject){
         HashMap<String, Double> map = new HashMap<>();
         for(Sample sample : samples){
             map.put(sample.getLanguage(),new JaccardSimilarity(sample.getTrigram(), subject.getTrigram()).getResult());
         }
         return map;
+    }
+
+    /**
+     * Determines the final result
+     * @param fullword
+     * @param trigram
+     * @return
+     */
+    private String getFinalResult(HashMap<String, Double> fullword, HashMap<String, Double> trigram){
+        String fullwordString = "";
+        Double fullwordDouble = new Double(0);
+        for(Map.Entry<String, Double> entry : fullword.entrySet()) {
+            if(entry.getValue() > fullwordDouble) {
+                fullwordDouble = entry.getValue();
+                fullwordString = entry.getKey();
+            }
+        }
+        String trigramString = "";
+        Double trigramDouble = new Double(0);
+        for(Map.Entry<String, Double> entry : trigram.entrySet()) {
+            if(entry.getValue() > fullwordDouble) {
+                trigramDouble = entry.getValue();
+                trigramString = entry.getKey();
+            }
+        }
+        if(fullwordString.equals(trigramString)) return fullwordString;
+        return null;
     }
 }

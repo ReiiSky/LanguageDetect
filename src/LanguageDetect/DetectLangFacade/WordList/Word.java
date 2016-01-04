@@ -1,30 +1,54 @@
 package LanguageDetect.DetectLangFacade.WordList;
 
 /**
+ * Word Object that keeps each fullword's or trigram word's
+ * string and count.
+ *
  * Created by MuratCan on 3.1.2016.
  */
 public class Word implements Comparable<Word>{
     private String string;
     private int count;
 
+    /**
+     * Default Constructor
+     * Initial count is 1.
+     *
+     * @param string
+     */
     public Word(String string) {
         this.string = string;
         this.count = 1;
     }
 
+    /**
+     * Constructor.
+     * Sets the given string and the count.
+     *
+     * @param string
+     * @param count
+     */
     public Word(String string, int count) {
         this.string = string;
         this.count = count;
     }
-
+    //String getter, setter.
     public String getString() { return string; }
     public void setString(String string) { this.string = string; }
-
+    //Count getter, setter.
     public int getCount() { return count; }
     public void setCount(int count) { this.count = count; }
 
+    /**
+     * Increments count by one.
+     */
     public void incCount(){ this.count += 1; }
 
+    /**
+     * Adds the given count to its count.
+     *
+     * @param count
+     */
     public void addCount(int count){ this.count += count; }
 
     /**

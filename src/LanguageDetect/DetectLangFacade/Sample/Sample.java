@@ -2,14 +2,14 @@ package LanguageDetect.DetectLangFacade.Sample;
 
 import LanguageDetect.DetectLangFacade.WordList.Word;
 import LanguageDetect.DetectLangFacade.WordList.WordList;
-import LanguageDetect.DetectLangFacade.WordList.WordListFactory;
-import org.bson.Document;
 import org.bson.types.ObjectId;
-
-import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ * Sample Class.
+ * Contains sample data of trigram and fullword lists of its language.
+ * Uses WordList Factory.
+ *
  * Created by MuratCan on 3.1.2016.
  */
 public class Sample {
@@ -19,6 +19,9 @@ public class Sample {
     private WordList fullword;
     private WordList trigram;
 
+    /**
+     * Default constructor.
+     */
     public Sample(){
         this.id = null;
         this.language = null;
@@ -26,6 +29,16 @@ public class Sample {
         this.fullword = null;
         this.trigram = null;
     }
+
+    /**
+     * Constructor.
+     *
+     * @param id
+     * @param language
+     * @param specialChars
+     * @param fullword
+     * @param trigram
+     */
     public Sample(ObjectId id,String language,String specialChars, WordList fullword, WordList trigram) {
         this.id = id;
         this.language = language;
@@ -33,34 +46,27 @@ public class Sample {
         this.fullword = fullword;
         this.trigram = trigram;
     }
-
+    //ObjectId getter,setter.
     public ObjectId getId() { return id; }
     public void setId(ObjectId id) { this.id = id; }
-
-    public String getLanguage() {
-        return language;
-    }
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getSpecialChars() {
-        return specialChars;
-    }
+    //Language getter, setter.
+    public String getLanguage() { return language; }
+    public void setLanguage(String language) { this.language = language; }
+    //Special Characters getter, setter.
+    public String getSpecialChars() { return specialChars; }
     public void setSpecialChars(String specialChars) { this.specialChars = specialChars; }
-
-    public WordList getFullword() {
-        return fullword;
-    }
-    public void setFullword(WordList fullWord) {
-        this.fullword = fullWord;
-    }
-
+    //Fullword List getter, setter.
+    public WordList getFullword() { return fullword; }
+    public void setFullword(WordList fullWord) { this.fullword = fullWord; }
+    //Trigram List getter, setter.
     public WordList getTrigram() { return trigram; }
-    public void setTrigram(WordList trigramWord) {
-        this.trigram = trigramWord;
-    }
+    public void setTrigram(WordList trigramWord) { this.trigram = trigramWord; }
 
+    /**
+     * Updates Sample's Fullword List.
+     *
+     * @param fullwordlist
+     */
     public void updateFullword (WordList fullwordlist){
         for(Word w : fullwordlist.getList()){
             if(this.fullword.getList().contains(w))
@@ -72,6 +78,11 @@ public class Sample {
         if(this.fullword.getList().size() > 50) this.fullword.getList().subList(50, this.fullword.getList().size()).clear();
     }
 
+    /**
+     * Updates Sample's Trigram list.
+     *
+     * @param trigramlist
+     */
     public void updateTrigram(WordList trigramlist){
         for(Word w : trigramlist.getList()){
             if(this.trigram.getList().contains(w))

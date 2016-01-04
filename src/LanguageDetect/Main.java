@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Launches the Main Form.
+ */
 public class Main extends Application {
 
     @Override
