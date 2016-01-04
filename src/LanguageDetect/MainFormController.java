@@ -1,5 +1,6 @@
 package LanguageDetect;
 
+import LanguageDetect.DetectLangFacade.DetectLangFacade;
 import LanguageDetect.DetectLangFacade.Sample.Sample;
 import LanguageDetect.DetectLangFacade.Sample.SampleDAOMongo;
 import LanguageDetect.DetectLangFacade.Subject.Subject;
@@ -34,10 +35,9 @@ public class MainFormController {
     }
 
     public void check(ActionEvent actionEvent) {
-        SampleDAOMongo dao = new SampleDAOMongo();
-        Sample sample = dao.getSample("türkçe");
-        for(Word w : sample.getFullWord().getList()){
-            contextTA.appendText(w.getString() + " , " + w.getCount() + "\n");
-        }
+
+        DetectLangFacade newFacade = new DetectLangFacade(contextTA.getText());
+        contextTA.clear();
+        contextTA.appendText(newFacade.getFullwordResult().get("Türkçe").toString());
     }
 }

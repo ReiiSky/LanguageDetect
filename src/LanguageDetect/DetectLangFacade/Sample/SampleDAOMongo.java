@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class SampleDAOMongo implements SampleDAO {
     MongoClient client = new MongoClient();
     MongoDatabase database = client.getDatabase("langdetect");
-    MongoCollection<Document> sampleCollection = database.getCollection("sample");
+    MongoCollection<Document> sampleCollection = database.getCollection("samples");
 
     @Override
     public ArrayList<Sample> getAllSamples() {
@@ -33,8 +33,8 @@ public class SampleDAOMongo implements SampleDAO {
                             document.getObjectId("_id"),
                             document.getString("language"),
                             document.getString("specialChars"),
-                            convertDocToWordlist("Fullword",(ArrayList<Document>)document.get("fullword")),
-                            convertDocToWordlist("Trigram",(ArrayList<Document>)document.get("trigram"))
+                            convertDoclistToWordlist("Fullword",(ArrayList<Document>)document.get("fullword")),
+                            convertDoclistToWordlist("Trigram",(ArrayList<Document>)document.get("trigram"))
                     ));
                 }
             });
@@ -56,8 +56,8 @@ public class SampleDAOMongo implements SampleDAO {
                             document.getObjectId("_id"),
                             document.getString("language"),
                             document.getString("specialChars"),
-                            convertDocToWordlist("Fullword",(ArrayList<Document>)document.get("fullword")),
-                            convertDocToWordlist("Trigram",(ArrayList<Document>)document.get("trigram"))
+                            convertDoclistToWordlist("Fullword",(ArrayList<Document>)document.get("fullword")),
+                            convertDoclistToWordlist("Trigram",(ArrayList<Document>)document.get("trigram"))
                     );
                 }
             });
@@ -72,8 +72,8 @@ public class SampleDAOMongo implements SampleDAO {
         try{
             Document doc = new Document("language", sample.getLanguage())
                     .append("specialChars", sample.getSpecialChars())
-                    .append("fullword", convertWordlistToDoclist(sample.getFullWord().getList()))
-                    .append("trigram", convertWordlistToDoclist(sample.getTrigramWord().getList()));
+                    .append("fullword", convertWordlistToDoclist(sample.getFullword().getList()))
+                    .append("trigram", convertWordlistToDoclist(sample.getTrigram().getList()));
             sampleCollection.insertOne(doc);
             return true;
         }catch (MongoClientException e){
@@ -86,8 +86,8 @@ public class SampleDAOMongo implements SampleDAO {
         try{
             Document doc = new Document("language", sample.getLanguage())
                     .append("specialChars", sample.getSpecialChars())
-                    .append("fullword", convertWordlistToDoclist(sample.getFullWord().getList()))
-                    .append("trigram", convertWordlistToDoclist(sample.getTrigramWord().getList()));
+                    .append("fullword", convertWordlistToDoclist(sample.getFullword().getList()))
+                    .append("trigram", convertWordlistToDoclist(sample.getTrigram().getList()));
             sampleCollection.findOneAndReplace(new Document("language", sample.getLanguage()), doc);
             return true;
         }catch (MongoClientException e){
@@ -106,13 +106,14 @@ public class SampleDAOMongo implements SampleDAO {
         }
     }
 
-    private WordList convertDocToWordlist(String listType, ArrayList<Document> docs){
+    private WordList convertDoclistToWordlist(String listType, ArrayList<Document> docs){
         ArrayList<Word> wordlist = new ArrayList<>();
         for(Document doc : docs){
             wordlist.add(new Word(doc.getString("string"), doc.getInteger("count")));
         }
-        return new WordListFactory().createList(listType, wordlist);
+        return new WordListFactory().create(listType, wordlist);
     }
+
     private ArrayList<Document> convertWordlistToDoclist (ArrayList<Word> wordlist){
         ArrayList<Document> doclist = new ArrayList<>();
         for(Word word : wordlist){

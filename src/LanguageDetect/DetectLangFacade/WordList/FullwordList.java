@@ -12,9 +12,8 @@ public class FullwordList extends WordList {
         setParsingType(new FullWordParse());
         setList(wordlist);
     }
-
-    public FullwordList(String string) {
+    public FullwordList(String string, String specialChars) {
         setParsingType(new FullWordParse());
-        setList(getParsingType().parse(string));
+        setList(getParsingType().parse(string, specialChars));
     }
 }

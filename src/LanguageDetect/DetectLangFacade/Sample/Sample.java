@@ -1,11 +1,13 @@
 package LanguageDetect.DetectLangFacade.Sample;
 
+import LanguageDetect.DetectLangFacade.WordList.Word;
 import LanguageDetect.DetectLangFacade.WordList.WordList;
 import LanguageDetect.DetectLangFacade.WordList.WordListFactory;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by MuratCan on 3.1.2016.
@@ -44,17 +46,35 @@ public class Sample {
     }
     public void setSpecialChars(String specialChars) { this.specialChars = specialChars; }
 
-    public WordList getFullWord() {
+    public WordList getFullword() {
         return fullword;
     }
-    public void setFullWord(WordList fullWord) {
+    public void setFullword(WordList fullWord) {
         this.fullword = fullWord;
     }
 
-    public WordList getTrigramWord() {
-        return trigram;
-    }
-    public void setTrigramWord(WordList trigramWord) {
+    public WordList getTrigram() { return trigram; }
+    public void setTrigram(WordList trigramWord) {
         this.trigram = trigramWord;
+    }
+
+    public void updateFullword (WordList fullwordlist){
+        for(Word w : fullwordlist.getList()){
+            if(this.fullword.getList().contains(w))
+                this.fullword.getList().get(this.fullword.getList().indexOf(w)).incCount();
+            else
+                this.fullword.getList().add(w);
+        }
+        Collections.sort(this.fullword.getList(), Collections.reverseOrder());
+    }
+
+    public void updateTrigram(WordList trigramlist){
+        for(Word w : trigramlist.getList()){
+            if(this.trigram.getList().contains(w))
+                this.trigram.getList().get(this.trigram.getList().indexOf(w)).incCount();
+            else
+                this.trigram.getList().add(w);
+        }
+        Collections.sort(this.trigram.getList(), Collections.reverseOrder());
     }
 }

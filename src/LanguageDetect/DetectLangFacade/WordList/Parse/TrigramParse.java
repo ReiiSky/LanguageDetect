@@ -8,10 +8,12 @@ import java.util.Collections;
 public class TrigramParse implements ParsingType {
 
     @Override
-    public ArrayList<Word> parse(String string) {
-        string = string.toLowerCase().replaceAll("[^a-zA-ZğüşıöçĞÜŞİÖÇ\\s]"," ");
-        string = string.replaceAll("\\s+", " ").trim();
-        string = string.replaceAll("[^a-zA-ZğüşıöçĞÜŞİÖÇ]","_");
+    public ArrayList<Word> parse(String string, String specialChars) {
+        String regexSpace = "[^a-zA-Z" + specialChars + "\\s]";
+        String regexUnder = "[^a-zA-Z" + specialChars + "]";
+        string = string.toLowerCase().replaceAll(regexSpace," ")
+                .replaceAll("\\s+", " ").trim()
+                .replaceAll(regexUnder,"_");
         ArrayList<Word> arrayList = new ArrayList<Word>();
         Word word;
         for(int i = 0; i < string.length()-2; i++){

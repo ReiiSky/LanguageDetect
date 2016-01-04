@@ -10,9 +10,10 @@ import java.util.Collections;
  */
 public class FullWordParse implements ParsingType {
     @Override
-    public ArrayList<Word> parse(String string) {
-        String[] splitString = string.replaceAll("[^a-zA-ZğüşıöçĞÜŞİÖÇ\\s]"," ").toLowerCase().split("\\s+");
-        ArrayList<Word> arrayList = new ArrayList<Word>();
+    public ArrayList<Word> parse(String string, String specialChars) {
+        String regex = "[^a-zA-Z" + specialChars + "\\s]";
+        String[] splitString = string.replaceAll(regex," ").trim().toLowerCase().split("\\s+");
+        ArrayList<Word> arrayList = new ArrayList<>();
         Word word;
         for(String s : splitString){
             word = new Word(s);

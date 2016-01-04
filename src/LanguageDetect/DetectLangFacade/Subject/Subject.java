@@ -11,17 +11,17 @@ public class Subject {
     private WordList fullword;
     private WordList trigram;
 
-    public Subject(String context) {
+    public Subject(String context,String specialChars) {
         this.context = context;
-        setFullword(new WordListFactory().createList("Fullword", context));
-        setTrigram(new WordListFactory().createList("Trigram", context));
+        setFullword(new WordListFactory().create("Fullword", context, specialChars));
+        setTrigram(new WordListFactory().create("Trigram", context, specialChars));
     }
 
     public String getContext() { return context; }
-    public void setContext(String context) {
+    public void setContext(String context, String specialChars) {
         this.context = context;
-        setFullword(new WordListFactory().createList("Fullword", context));
-        setTrigram(new WordListFactory().createList("Trigram", context));
+        setFullword(new WordListFactory().create("Fullword", context, specialChars));
+        setTrigram(new WordListFactory().create("Trigram", context, specialChars));
     }
 
     public WordList getFullword() { return fullword; }

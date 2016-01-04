@@ -13,9 +13,8 @@ public class TrigramList extends WordList {
         setParsingType(new TrigramParse());
         setList(wordlist);
     }
-
-    public TrigramList(String string) {
+    public TrigramList(String string, String specialChars) {
         setParsingType(new TrigramParse());
-        setList(getParsingType().parse(string));
+        setList(getParsingType().parse(string, specialChars));
     }
 }
