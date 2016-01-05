@@ -20,7 +20,7 @@ public class TrigramParse implements ParsingType {
      */
     @Override
     public ArrayList<Word> parse(String string, String specialChars) {
-        String regexSpace = "[^a-zA-Z" + specialChars + "\\s]";//setting regex for replace operation.
+        String regexSpace = "[^a-zA-Z" + specialChars + "\\s+]";//setting regex for replace operation.
         String regexUnder = "[^a-zA-Z" + specialChars + "]";//setting regex for the second replace operation.
         string = string.toLowerCase().replaceAll(regexSpace," ")
                 .replaceAll("\\s+", " ").trim()

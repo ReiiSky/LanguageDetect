@@ -91,6 +91,6 @@ public class Sample {
                 this.trigram.getList().add(w);
         }
         Collections.sort(this.trigram.getList(), Collections.reverseOrder());
-        if(this.fullword.getList().size() > 50) this.fullword.getList().subList(50, this.fullword.getList().size()).clear();
+        if(this.trigram.getList().size() > 50) this.trigram.getList().subList(50, this.trigram.getList().size()).clear();
     }
 }
