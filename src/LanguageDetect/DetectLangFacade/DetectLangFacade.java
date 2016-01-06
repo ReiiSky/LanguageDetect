@@ -30,9 +30,11 @@ public class DetectLangFacade {
             specialChars += s.getSpecialChars();
         }
         this.subject = new Subject(context, specialChars); //creates the subject
-        this.fullwordResults = checkFullwords(this.samples, this.subject); //set of results according to fullword list.
         this.trigramResults = checkTrigram(this.samples, this.subject);//set of results according to trigram list.
-        this.result = getFinalResult(fullwordResults, trigramResults); // final result.
+        this.fullwordResults = checkFullwords(this.samples, this.subject); //set of results according to fullword list.
+        if(subject.getFullword().getList().size() < 25) this.result = getFinalResult(trigramResults);
+        else this.result = getFinalResult(fullwordResults);
+         // final result.
     }
 
     public ArrayList<Sample> getSamples() { return samples; }
@@ -79,28 +81,18 @@ public class DetectLangFacade {
 
     /**
      * Determines the final result
-     * @param fullword
-     * @param trigram
+     * @param results
      * @return
      */
-    private String getFinalResult(HashMap<String, Double> fullword, HashMap<String, Double> trigram){
-        String fullwordString = "";
-        Double fullwordDouble = new Double(0);
-        for(Map.Entry<String, Double> entry : fullword.entrySet()) {
-            if(entry.getValue() > fullwordDouble) {
-                fullwordDouble = entry.getValue();
-                fullwordString = entry.getKey();
+    private String getFinalResult(HashMap<String, Double> results){
+        String resultString = "";
+        Double resultDouble = new Double(0);
+        for(Map.Entry<String, Double> entry : results.entrySet()) {
+            if(entry.getValue() > resultDouble) {
+                resultDouble = entry.getValue();
+                resultString = entry.getKey();
             }
         }
-        String trigramString = "";
-        Double trigramDouble = new Double(0);
-        for(Map.Entry<String, Double> entry : trigram.entrySet()) {
-            if(entry.getValue() > fullwordDouble) {
-                trigramDouble = entry.getValue();
-                trigramString = entry.getKey();
-            }
-        }
-        if(fullwordString.equals(trigramString)) return fullwordString;
-        return null;
+        return resultString;
     }
 }
