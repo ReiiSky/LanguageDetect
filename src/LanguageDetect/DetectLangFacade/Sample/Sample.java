@@ -9,8 +9,6 @@ import java.util.Collections;
  * Sample Class.
  * Contains sample data of trigram and fullword lists of its language.
  * Uses WordList Factory.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public class Sample {
     private ObjectId id;

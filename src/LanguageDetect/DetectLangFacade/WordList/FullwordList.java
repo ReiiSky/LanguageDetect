@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 /**
  * Subclass of the Abstract WordList Class.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public class FullwordList extends WordList {
     /**

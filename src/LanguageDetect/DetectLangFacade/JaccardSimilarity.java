@@ -7,8 +7,6 @@ import LanguageDetect.DetectLangFacade.WordList.WordList;
 
 /**
  * Calculates the similarities of the lists.
- *
- * Created by MuratCan on 4.1.2016.
  */
 public class JaccardSimilarity {
     private double result;

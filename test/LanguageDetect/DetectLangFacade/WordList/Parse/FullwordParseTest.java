@@ -10,8 +10,6 @@ import static org.junit.Assert.*;
 
 /**
  * Tests fullword parsing.
- *
- * Created by MuratCan on 5.1.2016.
  */
 public class FullwordParseTest {
 

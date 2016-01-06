@@ -9,8 +9,6 @@ import static org.junit.Assert.*;
 
 /**
  * Tests Word Object.
- *
- * Created by MuratCan on 5.1.2016.
  */
 public class WordTest {
     /**

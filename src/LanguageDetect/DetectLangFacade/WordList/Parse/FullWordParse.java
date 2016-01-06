@@ -7,8 +7,6 @@ import java.util.Collections;
 
 /**
  * Trigram Parsing Type. Implements ParsingType Interface.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public class FullwordParse implements ParsingType {
     /**

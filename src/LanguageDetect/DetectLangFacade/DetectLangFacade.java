@@ -12,8 +12,6 @@ import java.util.Map;
  * A facade that determines given text's language.
  * All inner work is done in this facade so the user
  * doesn't have to know about the process.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public class DetectLangFacade {
     private ArrayList<Sample> samples;

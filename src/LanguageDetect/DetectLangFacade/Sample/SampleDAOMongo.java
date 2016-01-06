@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 /**
  * Data Access Object Pattern Implementation for MongoDB.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public class SampleDAOMongo implements SampleDAO {
     MongoClient client = new MongoClient(); //Default MongoClient.

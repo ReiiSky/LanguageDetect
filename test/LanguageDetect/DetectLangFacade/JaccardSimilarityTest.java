@@ -8,8 +8,6 @@ import static org.junit.Assert.*;
 
 /**
  * Tests Jaccard Similarity Algorithm
- *
- * Created by MuratCan on 5.1.2016.
  */
 public class JaccardSimilarityTest {
     @Test

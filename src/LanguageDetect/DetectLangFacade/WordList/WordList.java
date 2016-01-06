@@ -8,8 +8,6 @@ import java.util.HashMap;
 /**
  * Abstract WordList class.
  * Keeps Word objects in a list.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public abstract class WordList {
     private ArrayList<Word> list;

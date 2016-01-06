@@ -11,8 +11,6 @@ import static org.junit.Assert.*;
 
 /**
  * Tests Sample Class.
- *
- * Created by MuratCan on 5.1.2016.
  */
 public class SampleTest {
 

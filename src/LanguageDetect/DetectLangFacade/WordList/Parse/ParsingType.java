@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 /**
  * ParsingType Interface for Parsing Strategy.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public interface ParsingType {
     /**

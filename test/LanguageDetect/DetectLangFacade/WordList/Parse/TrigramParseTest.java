@@ -8,9 +8,6 @@ import java.util.Collections;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by MuratCan on 5.1.2016.
- */
 public class TrigramParseTest {
 
     @Test

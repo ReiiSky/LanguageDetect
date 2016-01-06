@@ -6,8 +6,6 @@ import LanguageDetect.DetectLangFacade.WordList.WordListFactory;
 /**
  * Subject class.
  * Uses WordList Factory.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public class Subject {
     private String context;

@@ -3,8 +3,6 @@ package LanguageDetect.DetectLangFacade.WordList;
 /**
  * Word Object that keeps each fullword's or trigram word's
  * string and count.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public class Word implements Comparable<Word>{
     private String string;

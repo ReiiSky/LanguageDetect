@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 /**
  * Data Access Object Pattern Interface for Sample.
- *
- * Created by MuratCan on 3.1.2016.
  */
 public interface SampleDAO {
     ArrayList<Sample> getAllSamples();
